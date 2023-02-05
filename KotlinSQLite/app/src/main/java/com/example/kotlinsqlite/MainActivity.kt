@@ -15,11 +15,18 @@ class MainActivity : AppCompatActivity() {
             // Onceden database varsaa ac yoksa olustur..
             val myDatabase = this.openOrCreateDatabase("Musicians", Context.MODE_PRIVATE, null)
             myDatabase.execSQL("CREATE TABLE IF NOT EXISTS musicians (id INTEGER PRIMARY KEY,name VARCHAR, age INT)")
+
             //myDatabase.execSQL("INSERT INTO musicians (name,age) VALUES ('Hicran',25)")
             //myDatabase.execSQL("INSERT INTO musicians (name,age) VALUES ('nURELLA',25)")
 
+            //myDatabase.execSQL("UPDATE musicians SET age=50 WHERE id=3")
+
+            myDatabase.execSQL("DELETE FROM musicians WHERE name='Hicran'")
+
             //kaydettigimiz seyi cekmek icin bir imlec(cursor) ile calisiyoruz.
-            val cursor = myDatabase.rawQuery("SELECT * FROM musicians WHERE name LIKE '%a'", null)
+            //val cursor = myDatabase.rawQuery("SELECT * FROM musicians WHERE name LIKE '%a'", null)
+
+            val cursor =myDatabase.rawQuery("SELECT * FROM musicians ",null)
 
             val nameIndex = cursor.getColumnIndex("name")
             val ageIndex = cursor.getColumnIndex("age")
